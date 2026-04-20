@@ -1,8 +1,13 @@
+name: Test GitHub Action
+
 on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      -run: - ls -lah
-      -run: echo "Hello World"
+      - name: List files
+        run: ls -lah
+
+      - name: Hello
+        run: echo "Hello World"

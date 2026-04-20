@@ -2,7 +2,7 @@
 
 This example shows how to configure Cypress to work with Next.js.
 
-## Deploy your own
+## Deploy your ow
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-cypress&project-name=with-cypress&repository-name=with-cypress)
 
