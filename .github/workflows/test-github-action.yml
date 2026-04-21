@@ -5,6 +5,31 @@ on:
   pull_request:
 
 jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSHKEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSHHOST }} >> ~/.ssh/known_hosts
+
+      - name: Test SSH connection
+        run: |
+          ssh ${{ secrets.SSHUSER }}@${{ secrets.SSHHOST }} "ls -la"
+
+      - name: Deploy on server
+        run: |
+          ssh ${{ secrets.SSHUSER }}@${{ secrets.SSHHOST }} '
+            cd /home/${{ secrets.SSHUSER }}/with-cypress-app
+            git pull origin main
+            npm install
+            npm run build
+            pm2 restart next-app || pm2 start npm --name "next-app" -- start
+          '
+
   build:
     runs-on: ubuntu-latest
 
