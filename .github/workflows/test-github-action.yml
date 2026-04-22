@@ -99,6 +99,8 @@ jobs:
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
+        env:
+          TS_NODE_PROJECT: tsconfig.cypress.json
         with:
           start: npm run dev
           wait-on: 'http://localhost:3000'
