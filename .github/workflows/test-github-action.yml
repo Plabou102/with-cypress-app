@@ -122,16 +122,15 @@ jobs:
         run: |
           ssh "${{ secrets.SSHUSER }}@${{ secrets.SSHHOST }}" "ls -la /home/${{ secrets.SSHUSER }}/with-cypress-app-recette"
 
-      - name: Deploy recette on server
+      - name: Deploy recette on server (Docker)
         run: |
           ssh "${{ secrets.SSHUSER }}@${{ secrets.SSHHOST }}" "
             cd /home/${{ secrets.SSHUSER }}/with-cypress-app-recette &&
             git fetch origin &&
             git checkout develop &&
             git pull origin develop &&
-            npm install &&
-            npm run build &&
-            (pm2 restart next-app-recette || pm2 start npm --name next-app-recette -- start -- --port 3001)
+            docker compose -f compose.prod.yml down &&
+            docker compose -f compose.prod.yml up --build -d
           "
 
   deploy_production:
@@ -151,14 +150,13 @@ jobs:
         run: |
           ssh "${{ secrets.SSHUSER }}@${{ secrets.SSHHOST }}" "ls -la /home/${{ secrets.SSHUSER }}/with-cypress-app-production"
 
-      - name: Deploy production on server
+      - name: Deploy production on server (Docker)
         run: |
           ssh "${{ secrets.SSHUSER }}@${{ secrets.SSHHOST }}" "
             cd /home/${{ secrets.SSHUSER }}/with-cypress-app-production &&
             git fetch origin --tags &&
             git checkout main &&
             git pull origin main &&
-            npm install &&
-            npm run build &&
-            (pm2 restart next-app-prod || pm2 start npm --name next-app-prod -- start -- --port 3000)
+            docker compose -f compose.prod.yml down &&
+            docker compose -f compose.prod.yml up --build -d
           "
