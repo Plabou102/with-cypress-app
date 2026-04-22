@@ -1,8 +1,13 @@
-const { defineConfig } = require("cypress");
+import { defineConfig } from "cypress";
 
-module.exports = defineConfig({
+export default defineConfig({
   e2e: {
-    baseUrl: "http://localhost:3000",
-    supportFile: false
-  }
+    setupNodeEvents(on, config) {},
+  },
+  component: {
+    devServer: {
+      framework: "next",
+      bundler: "webpack",
+    },
+  },
 });
