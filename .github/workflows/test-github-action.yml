@@ -147,7 +147,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H "${{ secrets.SSHHOST }}" >> ~/.ssh/known_hosts
 
-      - name: Test SSH connection
+      - name: Test SSH connexion
         run: |
           ssh "${{ secrets.SSHUSER }}@${{ secrets.SSHHOST }}" "ls -la /home/${{ secrets.SSHUSER }}/with-cypress-app-production"
 
