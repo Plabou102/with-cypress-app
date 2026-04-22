@@ -112,7 +112,7 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Intall dependencies
         run: npm install
 
       - name: Run Cypress tests
