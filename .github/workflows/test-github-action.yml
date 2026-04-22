@@ -111,7 +111,7 @@ jobs:
     if: github.ref == 'refs/heads/develop'
 
     steps:
-      - name: Configure SSH
+      - name: Configurer SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSHKEY }}" > ~/.ssh/id_rsa
