@@ -1,8 +1,5 @@
 #!/bin/sh
 
-echo "Starting app..."
+echo "Starting Next.js app..."
 
-# sécurité (optionnel)
-npm run build
-
-exec npm run start
+exec node server.js
